@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: datatomysql.light
+Class-Path: lib/mysql-connector-java-5.1.32-bin.jar

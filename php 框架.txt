@@ -1,0 +1,3 @@
+php ®Ø¬[
+	php laravel ±Ð¾Ç
+		http://laravel.tw/docs/4.2/quick

@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <style type="text/css">
+      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+    </style>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCP3Q5VOlh-wLbrFIeOFFALiSz0lqqlut4">
+    </script>
+    <script type="text/javascript">
+		function initialize()
+		{
+			var mapOptions = {};
+			var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+			// 新增三個點
+			var taipeiStation = new google.maps.LatLng(25.048079, 121.517080);//台北車站
+			var banqiaoStation = new google.maps.LatLng(25.014304, 121.463782);//板橋車站
+			var wanhuaStation = new google.maps.LatLng(25.033631, 121.500264);//萬華車站
+			// 檢視範圍:輸入上述三個點，地圖載入時，會自動呈現適當的檢視範圍
+			var bounds = new google.maps.LatLngBounds( );
+			bounds.extend(taipeiStation);
+			bounds.extend(wanhuaStation);
+			bounds.extend(banqiaoStation);
+			map.fitBounds(bounds);
+			// 加上marker和點擊時的訊息視窗
+			var taipeiMarker = new google.maps.Marker({
+				position: taipeiStation,
+				map: map
+			});
+			var banqiaoMarker = new google.maps.Marker({
+				position: banqiaoStation,
+				map: map
+			});
+			var wanhuaMarker = new google.maps.Marker({
+				position: wanhuaStation,
+				map: map
+			});
+		  attachSecretMessage(taipeiMarker, 0);
+		  attachSecretMessage(wanhuaMarker, 1);
+		  attachSecretMessage(banqiaoMarker, 2);
+		}
+		function attachSecretMessage(marker, num)
+		{
+			var message = ['台北車站<br>Taipei Station', '萬華車站<br>Wanhua Station', '板橋車站<br>Banqiao Station'];
+			var infowindow = new google.maps.InfoWindow({
+				content: message[num]
+			  });
+			  google.maps.event.addListener(marker, 'click', function() {
+				infowindow.open(marker.get('map'), marker);
+			  });
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+  <body>
+	<div id="map-canvas" style="width:90%; height:90%"></div>
+  </body>
+</html>

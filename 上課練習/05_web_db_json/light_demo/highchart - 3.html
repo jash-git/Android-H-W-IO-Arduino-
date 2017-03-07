@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8" http-equiv="refresh" content="5">
+
+	<title>Highcharts</title>
+		<!-- jQuery css and js -->
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />		
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		
+		<!--include the highcharts library-->
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+
+		<!-- Bootstrap css and js -->
+		<link  rel= "stylesheet"  href= "http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" >
+		<link  rel= "stylesheet"  href= "http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme. min.css" >
+		<script src= "http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js" ></script>
+
+	<script language="javascript">
+
+	$(function () {
+		$.ajax({									  
+			url: 'database.php',				  //the script to call to get data		  
+			data: "",						//you can insert url argumnets here to pass to api.php for example "id=5&parent=6"
+			dataType: 'json',				//data format	  
+			success: function(data)		  //on recieve of reply
+			{	
+				var time = [];
+				var val = [];
+				var va2 = [];
+				//for (var i = 0, len = data.length; i < len; i++)
+				for (var i = 5, len = data.length; i >0; i--)
+				{
+					time.push(data[len-i][2]);
+					val.push(parseInt(data[len-i][1]));//將每筆光敏值放入陣列val中
+					va2.push(parseInt(data[len-i][1]-100));//將每筆光敏值放入陣列val中
+				}
+
+		$('#container').highcharts({
+		title: {
+			text: 'Sensor data from MySQL to Highcharts',
+			x: -20 //center
+		},
+		subtitle: {
+			text: 'Light Value',
+			x: -20
+		},
+		xAxis: {
+			title: {
+			text: 'Time'
+			},
+			categories: time
+			
+		},
+		yAxis: {
+			title: {
+			text: 'value'
+			},
+		},
+		series: [{
+			name: 'Sensor-Light',
+			data: val
+		},
+		{
+			name: 'Sensor-Light1',
+			data: va2
+		}
+		]
+	});
+	  } 
+
+	});
+
+});
+</script>
+</head>
+
+<body>
+<!-- 導航欄 -->
+	<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+		<!-- 居中效果 -->
+		<div class="container">
+			<!-- 導航欄header -->
+			<div class="navbar-header">
+				<!-- 做切換按鈕-->
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<!-- bootstrap題目 -->
+				<a class="navbar-brand" href="#">Bootstrap theme</a>
+			</div>
+			<!-- 區塊元素<ul>，將內容顯示為項目清單，每一項用<li>標記-->
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Setting</a></li>
+							<li><a href="#">Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div>
+	<div class="container">
+		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	</div>
+	
+	<div class="container">
+		<div class="footer">
+			<p>&copy; Company 2014</p>
+		</div>
+	</div>
+</body>
+</html>

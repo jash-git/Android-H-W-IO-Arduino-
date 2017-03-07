@@ -1,0 +1,2 @@
+http://localhost:8080/light_demo/database.php
+http://localhost:8080/light_demo/highchart.html

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- jQuery css and js -->
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />		
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+
+			$.ajax({
+				url: 'database.php',				  //the script to call to get data		  
+				data: "",						//you can insert url argumnets here to pass to api.php for example "id=5&parent=6"
+				dataType: 'json',				//data format
+				success: function(data)		  //on recieve of reply
+				{
+					alert("OK");
+					dofun();
+				}
+			});
+
+		});
+		function dofun()
+		{
+			alert("OK1");
+		}
+	</script>
+</head>
+<body>
+
+</body>
+</html>
